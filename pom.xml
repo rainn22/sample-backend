@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- YOUR Spring Boot -->
+    <!-- Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -20,9 +20,9 @@
     <name>sample</name>
     <description>sample</description>
 
-    <!-- YOUR Java -->
+    <!-- ✅ Java 17 -->
     <properties>
-        <java.version>25</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
@@ -72,12 +72,12 @@
     <build>
         <plugins>
 
-            <!-- Compiler -->
+            <!-- ✅ Compiler → Java 17 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <release>25</release>
+                    <release>17</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -93,7 +93,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- ✅ Jib Container Build -->
+            <!-- ✅ Jib (Java 17 image) -->
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
@@ -101,14 +101,17 @@
 
                 <configuration>
 
-                    <!-- Java 25 runtime image -->
+                    <!-- Base image -->
                     <from>
-                        <image>eclipse-temurin:25-jre</image>
+                        <image>eclipse-temurin:17-jre</image>
                     </from>
 
-                    <!-- Container registry -->
+                    <!-- Your container registry -->
                     <to>
-                        <image>ghcr.io/rain22/sample</image>
+                        <image>ghcr.io/rainn22/sample</image>
+                        <tags>
+                            <tag>latest</tag>
+                        </tags>
                     </to>
 
                     <container>
