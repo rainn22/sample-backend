@@ -6,11 +6,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Spring Boot -->
+    <!-- ✅ Spring Boot (Stable Version) -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.2</version>
+        <version>3.3.5</version>
         <relativePath/>
     </parent>
 
@@ -27,39 +27,39 @@
 
     <dependencies>
 
-        <!-- Web -->
+        <!-- ✅ Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JPA -->
+        <!-- ✅ JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Actuator -->
+        <!-- ✅ Actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- PostgreSQL -->
+        <!-- ✅ PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- ✅ Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Devtools -->
+        <!-- ✅ Devtools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -67,12 +67,19 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- ✅ TEST DEPENDENCY (Fix compilation error) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
 
-            <!-- ✅ Compiler → Java 17 -->
+            <!-- ✅ Compiler Java 17 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -87,13 +94,13 @@
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot -->
+            <!-- ✅ Spring Boot Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- ✅ Jib (Java 17 image) -->
+            <!-- ✅ Jib Container Build -->
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
@@ -101,12 +108,12 @@
 
                 <configuration>
 
-                    <!-- Base image -->
+                    <!-- Base Image -->
                     <from>
                         <image>eclipse-temurin:17-jre</image>
                     </from>
 
-                    <!-- Your container registry -->
+                    <!-- Container Registry -->
                     <to>
                         <image>ghcr.io/rainn22/sample</image>
                         <tags>
@@ -114,10 +121,18 @@
                         </tags>
                     </to>
 
+                    <!-- Container Config -->
                     <container>
                         <ports>
                             <port>8080</port>
                         </ports>
+
+                        <!-- Optional memory tuning -->
+                        <jvmFlags>
+                            <jvmFlag>-Xms256m</jvmFlag>
+                            <jvmFlag>-Xmx512m</jvmFlag>
+                        </jvmFlags>
+
                         <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
                     </container>
 
